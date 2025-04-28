@@ -1,5 +1,5 @@
 {
-  "name": "testapp",
+  "name": "sustainabilityadvisor",
   "license": "0BSD",
   "version": "1.0.0",
   "main": "index.js",
@@ -13,7 +13,10 @@
     "expo": "~52.0.46",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
-    "react-native": "0.76.9"
+    "react-native": "0.76.9",
+    "react-native-image-picker": "^8.2.0",
+    "expo-image-picker": "~16.0.6",
+    "expo-screen-orientation": "~8.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
