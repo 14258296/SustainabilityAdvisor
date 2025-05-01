@@ -82,6 +82,11 @@ const HomeScreen = () => {
   };
 
   const handleOnSubmitEditing = async () => {
+
+    if (final_product === '') {
+      return;
+    }
+
     console.log('Submitted:', 'text');
     setLoading(true);
     await handleUploadData(
@@ -164,7 +169,18 @@ const HomeScreen = () => {
         <View style={styles.column40}>
           <Text style={styles.sectionHeader}>{STRINGS.detailedInsights}</Text>
           <InsightsPanel insights={insights} />
-          <ExportButton />
+          <ExportButton
+            selectedImage={selectedImage}
+            description={description}
+            score={sustainabilityScore}
+            alternative={alternative}
+            disposal={disposalMethod}
+            insights={insights}
+            compatibilityInput={compatibilityInput}
+            inputMaterial={inputMaterial}
+            finalProduct={final_product}
+            sustainableUsagePractices={sustainableUsagePractices}
+          />
         </View>
       </View>
 

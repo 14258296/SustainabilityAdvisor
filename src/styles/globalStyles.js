@@ -333,5 +333,11 @@ export const styles = StyleSheet.create({
     color: COLORS.primary,
     marginBottom: 12,
     textAlignVertical: 'bottom',
-  }
+  },
+  speakerIcon: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    zIndex: 10,
+  },
 });

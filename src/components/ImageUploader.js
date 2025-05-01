@@ -26,7 +26,7 @@ const ImageUploader = ({ selectedImage, onImageSelect, onUpload, loading }) => {
               selectedImage ? { uri: selectedImage } : require('../../assets/adaptive-icon.png')
             }
             style={styles.placeholderImage}
-            // resizeMode="contain" // Ensuring the image fits without cropping or filling
+            resizeMode="contain" // Ensuring the image fits without cropping or filling
           />
 
           {loading && (
