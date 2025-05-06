@@ -2,20 +2,21 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { COLORS } from '../constants/colors';
 
 const { width, height } = Dimensions.get('window');
+const inputButtonHeight = height * 0.045; // 25% smaller height
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    marginTop: 30,
-    marginBottom: 30,
-    backgroundColor: COLORS.background, // Soft background
+    padding: 15,
+    marginTop: 0,
+    marginBottom: 0,
+    backgroundColor: COLORS.background,
   },
   title: {
     fontSize: width * 0.035,
     fontWeight: 'bold',
     marginBottom: 24,
-    color: COLORS.primary, // Accenture purple for title
+    color: COLORS.primary,
     textAlign: 'start',
   },
   row: {
@@ -26,93 +27,101 @@ export const styles = StyleSheet.create({
   },
   inputRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
-    marginBottom: 20,
   },
-  column60: {
+  column: {
+    flex: 1,
+    paddingHorizontal: 8,
+  },
+  InsightsMainContainer: {
     flex: 3,
     padding: 16,
     marginRight: 8,
-    backgroundColor: COLORS.cardBackground, // White card background
+    backgroundColor: COLORS.cardBackground,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: COLORS.border, // Light purple border
+    borderColor: COLORS.border,
     shadowColor: COLORS.primary,
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 6,
     width: '100%',
-    maxWidth: '65%',
+    marginTop: 10
   },
-  column40: {
-    flex: 2,
+  InputContainer: {
     padding: 16,
-    backgroundColor: COLORS.cardBackground, // White card background
+    backgroundColor: COLORS.cardBackground,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: COLORS.border, // Light purple border
+    borderColor: COLORS.border,
     shadowColor: COLORS.primary,
     shadowOpacity: 0.1,
     shadowRadius: 10,
     elevation: 6,
     justifyContent: 'space-between',
     width: '100%',
-    maxWidth: '35%',
+    marginTop: 10,
   },
   sectionHeader: {
-    fontSize: width * 0.022,
+    fontSize: width * 0.025,
     fontWeight: 'bold',
-    color: COLORS.primary, // Accenture purple for headers
+    color: COLORS.primary,
     marginBottom: 12,
   },
   compatibilityBlock: {
     flex: 1,
     marginLeft: 10,
   },
+  imageBlock: {
+    flex: 1,
+  },
   inputBlock: {
-    width: '50%',
+    width: '100%',
   },
   imageCard: {
     width: '100%',
-    height: height * 0.33,
+    height: height * 0.2,
     borderRadius: 12,
     overflow: 'hidden',
     borderWidth: 2,
-    borderColor: COLORS.border, // Light purple border
-    backgroundColor: COLORS.cardBackground, // White card background
+    borderColor: COLORS.border,
+    backgroundColor: COLORS.cardBackground,
     marginBottom: 10,
   },
   placeholderImage: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // Ensure the image scales correctly
+    resizeMode: 'cover',
   },
   uploadButton: {
-    backgroundColor: COLORS.button, // Bright purple button color
-    paddingVertical: 14,
+    backgroundColor: COLORS.button,
+    height: inputButtonHeight,
+    justifyContent: 'center',
     borderRadius: 10,
     width: '100%',
-    marginTop: 12,
+    marginTop: 5,
+    marginBottom: 12,
     shadowColor: COLORS.primary,
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
   },
   compatibilityButton: {
-    backgroundColor: COLORS.button, // Bright purple button color
-    paddingVertical: 14,
+    backgroundColor: COLORS.button,
+    height: inputButtonHeight,
+    justifyContent: 'center',
     borderRadius: 10,
     width: '100%',
-    marginTop: 12,
+    marginTop: 5,
+    marginBottom: 12,
     shadowColor: COLORS.primary,
     shadowOpacity: 0.15,
     shadowRadius: 5,
     elevation: 4,
-    bottom: 0
+    bottom: 0,
   },
   uploadText: {
-    color: COLORS.buttonText, // White text on purple button
+    color: COLORS.buttonText,
     fontWeight: '600',
     textAlign: 'center',
     letterSpacing: 0.5,
@@ -123,60 +132,63 @@ export const styles = StyleSheet.create({
     marginBottom: 6,
     marginLeft: 6,
     marginTop: 6,
-    color: COLORS.textDark, // Dark text for readability
+    color: COLORS.textDark,
   },
   compatibilityInput: {
     borderWidth: 1,
-    borderColor: COLORS.secondary, // Lighter purple for input borders
+    borderColor: COLORS.secondary,
     borderRadius: 10,
     backgroundColor: '#f0faf7',
-    padding: 12,
+    paddingHorizontal: 12,
+    height: inputButtonHeight,
     marginBottom: 16,
     fontSize: 14,
-    color: COLORS.textDark, // Dark text inside input
+    color: COLORS.textDark,
   },
   descriptionLabel: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 6,
     marginLeft: 6,
-    color: COLORS.textDark, // Dark text for labels
+    color: COLORS.textDark,
   },
   descriptionDisplay: {
     height: height * 0.3,
     padding: 6,
     textAlignVertical: 'top',
     fontSize: 14,
-    color: COLORS.textDark, // Dark text for description
+    color: COLORS.textDark,
   },
   descriptionDisplayView: {
-    height: height * 0.18,
+    height: height * 0.2,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: COLORS.secondary, // Lighter purple for borders
+    borderColor: COLORS.secondary,
     borderRadius: 10,
     backgroundColor: '#e0f2f1',
+    marginBottom: 10,
   },
   sustainabilitySection: {
     marginTop: 10,
     borderTopWidth: 1,
-    borderColor: COLORS.border, // Light purple for section borders
+    borderColor: COLORS.border,
     paddingTop: 15,
   },
   scoreRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
+    paddingHorizontal: 8,
   },
   scoreCircle: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: COLORS.accent, // Bright purple for score circles
+    backgroundColor: COLORS.accent,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
-    borderColor: COLORS.primary, // Darker purple border
+    borderColor: COLORS.primary,
     shadowColor: COLORS.primary,
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -186,31 +198,32 @@ export const styles = StyleSheet.create({
   score: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: COLORS.buttonText, // White text for score
+    color: COLORS.buttonText,
   },
   cardRow: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: 12,
+    paddingTop: 20,
   },
   scoreCard: {
     flex: 1,
-    minHeight: 100, // Ensure all score cards are the same height
+    minHeight: 100,
     borderWidth: 1,
-    borderColor: COLORS.accent, // Bright purple borders for cards
+    borderColor: COLORS.accent,
     borderRadius: 10,
     padding: 12,
-    backgroundColor: COLORS.cardBackground, // White background for cards
+    backgroundColor: COLORS.cardBackground,
   },
   cardTitle: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: COLORS.textDark, // Dark text for card titles
+    color: COLORS.textDark,
   },
   cardSubtitle: {
     fontSize: 14,
-    color: COLORS.textDark, // Dark text for card subtitles
+    color: COLORS.textDark,
     marginTop: 6,
   },
   insightsContainer: {
@@ -219,7 +232,7 @@ export const styles = StyleSheet.create({
   },
   insightsSubtitle: {
     fontSize: 16,
-    color: COLORS.textDark, // Dark text for subtitles
+    color: COLORS.textDark,
     marginTop: 6,
   },
   exportButton: {
@@ -227,99 +240,43 @@ export const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 22,
     borderRadius: 10,
-    backgroundColor: COLORS.button, // Purple export button
+    backgroundColor: COLORS.button,
     shadowColor: COLORS.primary,
     shadowOpacity: 0.2,
     shadowRadius: 6,
     elevation: 5,
   },
   exportText: {
-    color: COLORS.buttonText, // White text on button
+    color: COLORS.buttonText,
     fontWeight: '600',
     fontSize: 16,
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)', // Semi-transparent modal overlay
+    backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: COLORS.cardBackground, // White modal background
+    backgroundColor: COLORS.cardBackground,
     padding: 24,
     borderRadius: 16,
-    width: '50%', // Adjust modal width
-    borderColor: COLORS.accent, // Purple border for modal
+    width: '70%',
+    borderColor: COLORS.accent,
     borderWidth: 1,
   },
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 16,
     textAlign: 'center',
-    color: COLORS.primary, // Purple modal title
+    color: COLORS.primary,
+    marginBottom: 16,
   },
   modalOption: {
     fontSize: 16,
     paddingVertical: 12,
     textAlign: 'center',
-    color: COLORS.textDark, // Dark text for modal options
-  },
-  modalCancel: {
-    fontSize: 14,
-    paddingTop: 10,
-    textAlign: 'center',
-    color: COLORS.error, // Red for cancel option
-  },
-  checkButton: {
-    backgroundColor: COLORS.button, // Purple button for check action
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    marginTop: 10,
-  },
-  checkButtonText: {
-    color: COLORS.buttonText, // White text on button
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  loadingOverlay: {
-    position: 'absolute', // Ensures the overlay is positioned over the image
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent dark background
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12, // Match image container border radius
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)', // Semi-transparent overlay
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
-    backgroundColor: COLORS.cardBackground, // White background for modal content
-    padding: 24,
-    borderRadius: 16,
-    width: '70%', // Adjust modal width as needed
-    borderColor: COLORS.accent, // Accent color border for the modal
-    borderWidth: 1,
-  },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: COLORS.primary, // Purple title color
-    marginBottom: 16,
-  },
-  modalMessage: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: COLORS.textDark, // Dark text for the message
-    marginBottom: 24,
+    color: COLORS.textDark,
   },
   modalCancel: {
     fontSize: 16,
@@ -329,7 +286,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inputMaterialValue: {
-    fontSize: width * 0.013,
+    fontSize: width * 0.02,
     color: COLORS.primary,
     marginBottom: 12,
     textAlignVertical: 'bottom',
@@ -339,5 +296,50 @@ export const styles = StyleSheet.create({
     top: 16,
     right: 16,
     zIndex: 10,
+  },
+  loadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
+  },
+  deleteIcon: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    zIndex: 10,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 4,
+  },
+  scoreBarContainer: {
+    flex: 1,
+    marginRight: 20,
+    justifyContent: 'center',
+  },
+  
+  scoreBarBackground: {
+    width: '100%',
+    height: 20,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  
+  scoreBarFill: {
+    height: '100%',
+    backgroundColor: '#4caf50', // default green, can enhance with gradient or dynamic color
+  },
+  
+  scoreLabel: {
+    marginTop: 6,
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });

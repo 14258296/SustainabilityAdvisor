@@ -68,7 +68,6 @@ const MaterialCompatibilityModal = ({
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
 
-          {/* Speaker Icon */}
           <TouchableOpacity onPress={speakText} style={styles.speakerIcon}>
             <Ionicons name="volume-high" size={24} color="#6A1B9A" />
           </TouchableOpacity>
@@ -87,7 +86,6 @@ const MaterialCompatibilityModal = ({
             </>
           )}
 
-          {/* Close Button */}
           <Pressable onPress={() => {
               Speech.stop();
               onClose();

@@ -3,7 +3,7 @@
     "name": "SustainabilityAdvisor",
     "slug": "SustainabilityAdvisor",
     "version": "1.0.0",
-    "orientation": "default",
+    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
@@ -20,10 +20,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "screenOrientation": "default" 
+      "screenOrientation": "default",
+      "package": "com.sustainability.advisor"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8ea4c16d-4863-4ac0-8a71-f0aa0ba6d521"
+      }
     }
   }
 }

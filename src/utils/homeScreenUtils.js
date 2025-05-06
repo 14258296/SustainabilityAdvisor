@@ -36,10 +36,13 @@ export const handleUploadData = async (
 ) => {
   try {
     const data = await fetchSustainabilityInsights(image, compatibilityInput);
-    console.log(data);
+    console.log("API Response:", data); // log the full response to inspect
+
     const { analysis, material_compatibility } = data.data;
 
-    setters.setDescription(analysis.description);
+    // Set description with fallback in case it's undefined or null
+    setters.setDescription(analysis?.description || 'No description available');
+
     setters.setInputMaterial(`(${analysis.Input_material})`);
     setters.setIsCompatible(material_compatibility.is_compatible);
     setters.setInsights(analysis.detailed_sustainability_insights);

@@ -20,7 +20,9 @@
     "react-native-image-picker": "^8.2.0",
     "expo-speech": "~13.0.1",
     "expo-print": "~14.0.3",
-    "expo-sharing": "~13.0.1"
+    "expo-sharing": "~13.0.1",
+    "react-native-svg": "15.8.0",
+    "react-native-reanimated": "~3.16.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

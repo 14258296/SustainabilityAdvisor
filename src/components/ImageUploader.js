@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Image,
@@ -6,41 +6,132 @@ import {
   Text,
   Modal,
   Pressable,
+  TextInput,
+  Alert,
   ActivityIndicator,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/globalStyles';
 import { STRINGS } from '../constants/strings';
 
-const ImageUploader = ({ selectedImage, onImageSelect, onUpload, loading }) => {
+const ImageUploader = ({
+  selectedImage,
+  onImageSelect,
+  onUpload,
+  loading,
+  rawProductInput,
+  setRawProductInput,
+  compatibilityInput,
+  setCompatibilityInput,
+  handleOnSubmitEditing,
+  description,
+  checkMaterialCompatibilityPress,
+  handleDeleteImage
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const inputRef = useRef(null); // ✅ added useRef
 
-  const openModal = () => setModalVisible(true);
+  const openModal = () => {
+    if (rawProductInput.trim() !== '') {
+      Alert.alert('Notice', 'The Raw Material input is still filled. Kindly clear it before selecting a new image material.');
+      return;
+    }
+    setModalVisible(true);
+  };
+
   const closeModal = () => setModalVisible(false);
+
+  const setRawMaterial = () => {
+    if (selectedImage) {
+      Alert.alert(
+        'Notice',
+        'There is still an image, please remove it first before setting a new raw material.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              inputRef.current?.blur(); // ✅ blur input after alert
+            }
+          }
+        ]
+      );
+      return;
+    }
+  };
 
   return (
     <View style={styles.inputBlock}>
-      <TouchableOpacity style={styles.imageCard} onPress={openModal}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={
-              selectedImage ? { uri: selectedImage } : require('../../assets/adaptive-icon.png')
-            }
-            style={styles.placeholderImage}
-            resizeMode="contain" // Ensuring the image fits without cropping or filling
+      <View style={styles.inputRow}>
+        <View style={styles.column}>
+          <View style={styles.imageCard}>
+            <TouchableOpacity onPress={openModal}>
+              <View style={styles.imageContainer}>
+                <Image
+                  source={
+                    selectedImage
+                      ? { uri: selectedImage }
+                      : require('../../assets/adaptive-icon.png')
+                  }
+                  style={styles.placeholderImage}
+                  resizeMode="contain"
+                />
+                {loading && (
+                  <View style={styles.loadingOverlay}>
+                    <ActivityIndicator size="large" color="#ffffff" />
+                  </View>
+                )}
+              </View>
+            </TouchableOpacity>
+
+            {selectedImage && (
+              <TouchableOpacity
+                style={styles.deleteIcon}
+                onPress={handleDeleteImage}
+              >
+                <Icon name="trash" size={28} color="#ff3b30" />
+              </TouchableOpacity>
+            )}
+          </View>
+
+          <Text style={styles.compatibilityLabel}>{STRINGS.rawMaterial}</Text>
+          <TextInput
+            ref={inputRef}
+            style={styles.compatibilityInput}
+            placeholder={STRINGS.inputPlaceholder}
+            value={rawProductInput}
+            onChangeText={setRawProductInput}
+            onFocus={setRawMaterial}
           />
 
-          {loading && (
-            <View style={styles.loadingOverlay}>
-              <ActivityIndicator size="large" color="#ffffff" />
-            </View>
-          )}
+          <TouchableOpacity style={styles.uploadButton} onPress={onUpload}>
+            <Text style={styles.uploadText}>{STRINGS.uploadImage}</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
 
-      <TouchableOpacity style={styles.uploadButton} onPress={onUpload}>
-        <Text style={styles.uploadText}>{STRINGS.uploadImage}</Text>
-      </TouchableOpacity>
+        <View style={styles.column}>
+          <View style={styles.descriptionDisplayView}>
+            <Text style={styles.compatibilityLabel}>{STRINGS.description}</Text>
+            <Text style={styles.descriptionDisplay}>
+              {description}
+            </Text>
+          </View>
 
+          <Text style={styles.compatibilityLabel}>{STRINGS.finalProductCompatibility}</Text>
+          <TextInput
+            style={styles.compatibilityInput}
+            placeholder={STRINGS.finalProductPlaceholder}
+            value={compatibilityInput}
+            onChangeText={setCompatibilityInput}
+            onSubmitEditing={handleOnSubmitEditing}
+          />
+
+          <TouchableOpacity style={styles.compatibilityButton} onPress={checkMaterialCompatibilityPress}>
+            <Text style={styles.uploadText}>{STRINGS.finalProductButton}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      {/* Modal for Image Selection */}
       <Modal
         visible={modalVisible}
         transparent

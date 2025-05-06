@@ -2,14 +2,16 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { styles } from '../styles/globalStyles';
 import { STRINGS } from '../constants/strings';
+import Gauge from '../animations/Gauge';
 
 const SustainabilityScore = ({ score, alternative, disposal }) => (
   <View style={styles.sustainabilitySection}>
-    <Text style={styles.sectionHeader}>{STRINGS.sustainabilityScore}</Text>
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text style={styles.sectionHeader}>{STRINGS.sustainabilityScore}</Text>
+      {score !== '' && <Text style={styles.inputMaterialValue}> ({score})</Text>}
+    </View>
     <View style={styles.scoreRow}>
-      <View style={styles.scoreCircle}>
-        <Text style={styles.score}>{score}</Text>
-      </View>
+      <Gauge score={score} />
       <View style={styles.cardRow}>
         <View style={styles.scoreCard}>
           <Text style={styles.cardTitle}>{STRINGS.ecoFriendlyAlternative}</Text>
