@@ -1,7 +1,7 @@
 export const STRINGS = {
   appTitle: 'GenAI Sustainability Advisor',
   inputMaterial: 'Input Material',
-  uploadImage: 'Upload Image',
+  uploadImage: 'Analyze Compatibility',
   placeholderDescription: '',
   sustainabilityScore: 'Sustainability Score',
   ecoFriendlyAlternative: 'Eco-friendly Alternative',

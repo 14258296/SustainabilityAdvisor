@@ -1,4 +1,3 @@
-// components/ExportButton.js
 import React from 'react';
 import { TouchableOpacity, Text, Alert } from 'react-native';
 import * as Print from 'expo-print';
@@ -6,6 +5,8 @@ import * as Sharing from 'expo-sharing';
 import * as FileSystem from 'expo-file-system';
 import { styles } from '../styles/globalStyles';
 import { STRINGS } from '../constants/strings';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { COLORS } from '../constants/colors';
 
 const ExportButton = ({
   selectedImage,
@@ -18,6 +19,10 @@ const ExportButton = ({
   sustainableUsagePractices
 }) => {
   const generatePDF = async () => {
+    if (!compatibilityInput.trim()) {
+      Alert.alert('Notice', 'Please analyze a material first.');
+      return;
+    }
     try {
       let imageTag = '';
       if (selectedImage) {
@@ -85,9 +90,10 @@ const ExportButton = ({
   };
 
   return (
-    <TouchableOpacity style={styles.exportButton} onPress={generatePDF}>
-      <Text style={styles.exportText}>{STRINGS.exportReport}</Text>
+    <TouchableOpacity onPress={generatePDF}>
+      <MaterialCommunityIcon name="download" size={30} color={COLORS.primary} />
     </TouchableOpacity>
+
   );
 };
 

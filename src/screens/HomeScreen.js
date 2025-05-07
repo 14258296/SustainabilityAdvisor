@@ -9,6 +9,10 @@ import ExportButton from '../components/ExportButton';
 import MaterialCompatibilityModal from '../components/MaterialCompatibilityModal';
 import { requestMediaLibraryPermission, launchImageLibrary, launchCamera } from '../utils/imagePickerHelper';
 import { handleUploadData, resetAnalysisState } from '../utils/homeScreenUtils';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { COLORS } from '../constants/colors';
 
 const HomeScreen = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -116,20 +120,31 @@ const HomeScreen = () => {
       Alert.alert('No compatibility input', STRINGS.alertNoInput);
       return;
     }
-
+    if (final_product === '') {
+      Alert.alert(
+        'Notice',
+        'Before checking if the material is compatible, please use the prompt above to select a final product first. This will help us to provide a more accurate compatibility check.',
+        [{ text: 'OK', style: 'cancel' }]
+      );
+      return;
+    }
     setModalVisible(true);
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: styles.container.backgroundColor }}>
       <View style={styles.container}>
-        <Text style={styles.title}>{STRINGS.appTitle}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <MaterialCommunityIcon name="recycle" size={24} color={COLORS.primary} style={styles.titleIcon} />
+          <Text style={styles.title}>{STRINGS.appTitle}</Text>
+        </View>
 
         <View style={{ flex: 1 }}>
           <View style={styles.InputContainer}>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 12 }}>
+              <Icon name="flask" size={18} color={COLORS.primary} style={styles.headerIcon} />
               <Text style={styles.sectionHeader}>{STRINGS.inputMaterial}</Text>
-              <Text style={styles.inputMaterialValue}> {inputMaterial}</Text>
+              <Text style={styles.inputMaterialValue}>{inputMaterial}</Text>
             </View>
 
             <View style={styles.inputRow}>
@@ -149,29 +164,35 @@ const HomeScreen = () => {
                 handleDeleteImage={handleDeleteImage}
               />
             </View>
+          </View>
 
+          <View style={styles.InsightsMainContainer}>
             <SustainabilityScore
               score={sustainabilityScore}
               alternative={alternative}
               disposal={disposalMethod}
             />
-          </View>
 
-          <View style={styles.InsightsMainContainer}>
-            <Text style={styles.sectionHeader}>{STRINGS.detailedInsights}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+              <MaterialIcon name="insights" size={20} color={COLORS.primary} style={styles.headerIcon} />
+              <Text style={styles.sectionHeader}>{STRINGS.detailedInsights}</Text>
+              <View style={styles.exportButton}>
+                <ExportButton
+                  selectedImage={selectedImage}
+                  description={description}
+                  score={sustainabilityScore}
+                  alternative={alternative}
+                  disposal={disposalMethod}
+                  insights={insights}
+                  compatibilityInput={compatibilityInput}
+                  inputMaterial={inputMaterial}
+                  finalProduct={final_product}
+                  sustainableUsagePractices={sustainableUsagePractices}
+                />
+              </View>
+            </View>
+
             <InsightsPanel insights={insights} />
-            <ExportButton
-              selectedImage={selectedImage}
-              description={description}
-              score={sustainabilityScore}
-              alternative={alternative}
-              disposal={disposalMethod}
-              insights={insights}
-              compatibilityInput={compatibilityInput}
-              inputMaterial={inputMaterial}
-              finalProduct={final_product}
-              sustainableUsagePractices={sustainableUsagePractices}
-            />
           </View>
         </View>
 

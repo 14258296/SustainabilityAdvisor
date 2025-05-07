@@ -15,9 +15,10 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: width * 0.035,
     fontWeight: 'bold',
-    marginBottom: 24,
+    marginBottom: 10,
     color: COLORS.primary,
-    textAlign: 'start',
+    textAlign: 'center',
+    marginTop: 10
   },
   row: {
     flexDirection: 'row',
@@ -63,7 +64,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   sectionHeader: {
-    fontSize: width * 0.025,
+    fontSize: width * 0.03,
     fontWeight: 'bold',
     color: COLORS.primary,
     marginBottom: 12,
@@ -125,6 +126,7 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     textAlign: 'center',
     letterSpacing: 0.5,
+    fontSize: 18,
   },
   compatibilityLabel: {
     fontWeight: 'bold',
@@ -169,10 +171,10 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sustainabilitySection: {
-    marginTop: 10,
-    borderTopWidth: 1,
+    marginBottom: 10,
+    borderBottomWidth: 2,
     borderColor: COLORS.border,
-    paddingTop: 15,
+    paddingBottom: 15,
   },
   scoreRow: {
     flexDirection: 'row',
@@ -236,15 +238,18 @@ export const styles = StyleSheet.create({
     marginTop: 6,
   },
   exportButton: {
-    alignSelf: 'flex-start',
-    paddingVertical: 12,
-    paddingHorizontal: 22,
-    borderRadius: 10,
-    backgroundColor: COLORS.button,
-    shadowColor: COLORS.primary,
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 5,
+    // alignSelf: 'flex-start',
+    // paddingVertical: 12,
+    // paddingHorizontal: 22,
+    // borderRadius: 10,
+    // backgroundColor: COLORS.button,
+    // shadowColor: COLORS.primary,
+    // shadowOpacity: 0.2,
+    // shadowRadius: 6,
+    // elevation: 5,
+    flex: 1, 
+    alignItems: 'flex-end',
+    marginTop: -15
   },
   exportText: {
     color: COLORS.buttonText,
@@ -286,10 +291,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inputMaterialValue: {
-    fontSize: width * 0.02,
+    fontSize: width * 0.025,
     color: COLORS.primary,
     marginBottom: 12,
     textAlignVertical: 'bottom',
+    marginLeft: 4
   },
   speakerIcon: {
     position: 'absolute',
@@ -297,16 +303,28 @@ export const styles = StyleSheet.create({
     right: 16,
     zIndex: 10,
   },
+  leafAnimationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -90 }, { translateY: -10 }], // Adjusted to better center the leaves
+  },
+  animatedLeaf: {
+    margin: 5,
+  },
   loadingOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Transparent overlay
   },
   deleteIcon: {
     position: 'absolute',
@@ -335,11 +353,22 @@ export const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: '#4caf50', // default green, can enhance with gradient or dynamic color
   },
-  
   scoreLabel: {
     marginTop: 6,
     fontSize: 14,
     fontWeight: 'bold',
     color: '#333',
+  },
+  headerIcon: {
+    marginRight: 8, 
+    marginTop: -10
+  },
+  sustainabilityIcon: {
+    marginRight: 8,
+    alignSelf: 'center',
+  },
+  titleIcon: {
+    marginRight: 4, 
+    // marginTop: -5
   },
 });

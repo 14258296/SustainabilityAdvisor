@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Image,
@@ -8,7 +8,7 @@ import {
   Pressable,
   TextInput,
   Alert,
-  ActivityIndicator,
+  Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/globalStyles';
@@ -29,7 +29,35 @@ const ImageUploader = ({
   handleDeleteImage
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const inputRef = useRef(null); // ✅ added useRef
+  const inputRef = useRef(null);
+
+  const leafAnimationValues = new Array(6).fill(null).map(() => useRef(new Animated.Value(0)).current);
+
+  useEffect(() => {
+    if (loading) {
+      const animations = leafAnimationValues.map((leaf, index) => {
+        return Animated.loop(
+          Animated.sequence([
+            Animated.timing(leaf, {
+              toValue: -15,
+              duration: 500,
+              useNativeDriver: true,
+            }),
+            Animated.timing(leaf, {
+              toValue: 0,
+              duration: 500,
+              useNativeDriver: true,
+            }),
+          ])
+        );
+      });
+
+      Animated.stagger(100, animations).start();
+    }
+    return () => {
+      leafAnimationValues.forEach(leaf => leaf.stopAnimation());
+    };
+  }, [loading]);
 
   const openModal = () => {
     if (rawProductInput.trim() !== '') {
@@ -50,7 +78,7 @@ const ImageUploader = ({
           {
             text: 'OK',
             onPress: () => {
-              inputRef.current?.blur(); // ✅ blur input after alert
+              inputRef.current?.blur();
             }
           }
         ]
@@ -77,7 +105,19 @@ const ImageUploader = ({
                 />
                 {loading && (
                   <View style={styles.loadingOverlay}>
-                    <ActivityIndicator size="large" color="#ffffff" />
+                    <View style={styles.leafAnimationContainer}>
+                      {leafAnimationValues.map((leaf, index) => (
+                        <Animated.View
+                          key={index}
+                          style={{
+                            ...styles.animatedLeaf,
+                            transform: [{ translateY: leaf }],
+                          }}
+                        >
+                          <Icon name="leaf" size={20} color="#4CAF50" />
+                        </Animated.View>
+                      ))}
+                    </View>
                   </View>
                 )}
               </View>
