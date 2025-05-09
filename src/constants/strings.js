@@ -4,7 +4,7 @@ export const STRINGS = {
   uploadImage: 'Analyze Compatibility',
   placeholderDescription: '',
   sustainabilityScore: 'Sustainability Score',
-  ecoFriendlyAlternative: 'Eco-friendly Alternative',
+  ecoFriendlyAlternative: 'Sustainable Alternative',
   disposalMethod: 'Disposal Method',
   detailedInsights: 'Detailed Sustainability Insights',
   exportReport: 'Export Report',
