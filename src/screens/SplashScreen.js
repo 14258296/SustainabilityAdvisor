@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 export default function SplashScreen({ navigation }) {
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Home');
+      navigation.replace('SustainabilityScreen');
     }, 3000);
 
     return () => clearTimeout(timeout);

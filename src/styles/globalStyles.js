@@ -171,10 +171,9 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   sustainabilitySection: {
-    marginBottom: 10,
-    borderBottomWidth: 2,
-    borderColor: COLORS.border,
-    paddingBottom: 15,
+    // borderBottomWidth: 2,
+    // borderColor: COLORS.border,
+    paddingBottom: 10,
   },
   scoreRow: {
     flexDirection: 'row',

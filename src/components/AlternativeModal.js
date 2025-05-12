@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,41 +12,33 @@ import {
 import PagerView from 'react-native-pager-view';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../constants/colors';
-// import * as Speech from 'expo-speech'; // Optional: uncomment if using speech
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const AlternativeModal = ({ visible, onClose, alternatives = [] }) => {
+const AlternativeModal = ({ visible, onClose, alternatives, setSelectId, selectId }) => {
   const pagerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Optional speech support
-  const speakText = () => {
-    const currentItem = alternatives[currentIndex];
-    if (currentItem) {
-      const speechText = `${currentItem.description}`;
-      // Speech.speak(speechText);
+  useEffect(() => {
+    if (visible) {
+      setCurrentIndex(selectId);
+      pagerRef.current?.setPage(selectId);
     }
-  };
+  }, [visible, selectId]);
 
   const handleScroll = (index) => {
+    setSelectId(index);
     pagerRef.current?.setPage(index);
     setCurrentIndex(index);
   };
 
   return (
-    <View>
     <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
-          {/* Speak Button */}
-          {/* <TouchableOpacity onPress={speakText} style={styles.speakerIcon}>
-            <Ionicons name="volume-high" size={24} color={COLORS.primary} />
-          </TouchableOpacity> */}
-
           <Text style={styles.modalTitle}>
-            {alternatives[currentIndex]?.title || 'Eco Alternative'}
+            {alternatives[currentIndex]?.input_material || 'Eco Alternative'}
           </Text>
 
           <View style={styles.carouselContainer}>
@@ -59,19 +51,31 @@ const AlternativeModal = ({ visible, onClose, alternatives = [] }) => {
               <Ionicons name="chevron-back-circle" size={32} color={COLORS.primary} />
             </TouchableOpacity>
 
-            {/* Carousel */}
+            {/* PagerView */}
             <PagerView
               ref={pagerRef}
               style={styles.pagerView}
               initialPage={currentIndex}
-              onPageSelected={(e) => setCurrentIndex(e.nativeEvent.position)}
+              onPageSelected={(e) => {
+                const newIdx = e.nativeEvent.position;
+                setCurrentIndex(newIdx);
+                setSelectId(newIdx);
+              }}
             >
               {alternatives.map((item, index) => (
                 <View key={index} style={styles.carouselItem}>
-                  {item.image && (
+                  {item.image ? (
                     <Image source={item.image} style={styles.image} resizeMode="contain" />
+                  ) : (
+                    <Image
+                      source={item.url ? { uri: item.url } : require('../../assets/adaptive-icon.png')}
+                      style={styles.image}
+                      resizeMode="contain"
+                    />
                   )}
-                  <Text style={styles.carouselText}>{item.description}</Text>
+                  <Text style={styles.carouselText}>
+                    {item.detailed_sustainability_insights || item.description}
+                  </Text>
                 </View>
               ))}
             </PagerView>
@@ -89,20 +93,16 @@ const AlternativeModal = ({ visible, onClose, alternatives = [] }) => {
             </TouchableOpacity>
           </View>
 
-          {/* Close Button */}
+          {/* Close */}
           <Pressable
-            onPress={() => {
-              // Speech.stop(); // optional if using speech
-              setCurrentIndex(0);
-              onClose();
-            }}
+            onPress={() => onClose()}
             style={styles.closeButton}
           >
             <Text style={styles.modalCancel}>Close</Text>
           </Pressable>
         </View>
       </View>
-    </Modal></View>
+    </Modal>
   );
 };
 
@@ -170,9 +170,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  speakerIcon: {
-    position: 'absolute',
-    right: 20,
-    top: 20,
-  },
 });
+
